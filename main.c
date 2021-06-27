@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <vulkan/vulkan.h>
-
-#define BUFFER_SIZE 636744
 
 int main(){
 
@@ -14,8 +11,8 @@ int main(){
     fprintf(outf, "#include <vulkan/vulkan.h>\n\n");
 
     // Find largest word
-    uint32_t max = 0;
-    uint32_t length = 0;
+    int max = 0;
+    int length = 0;
     char c = 0;
 
     do{
@@ -32,7 +29,7 @@ int main(){
 
     char* word = malloc(sizeof(char) * max + 1);
     char* value = malloc(sizeof(char) * max + 1);
-    uint32_t value_length = 0;
+    int value_length = 0;
     memset(word, '\0', max + 1);
     memset(value, '\0', max + 1);
 
@@ -56,7 +53,7 @@ int main(){
                 c = getc(inf);
             }
             fprintf(outf, "#define STR_VK");
-            for(uint32_t i = 2; i < length; i ++){
+            for(int i = 2; i < length; i ++){
                 if(islower(word[i - 1]) && isupper(word[i])){
                     fprintf(outf, "_");
                 }
@@ -91,8 +88,8 @@ int main(){
                     value_length += 1;
                     c = getc(inf);
                 }
-                uint32_t bad = 0;
-                for(uint32_t i = 0; i < value_length; i ++){
+                int bad = 0;
+                for(int i = 0; i < value_length; i ++){
                     if(!isxdigit(value[i]) && value[i] != 'x' && value[i] != '-'){
                         bad = 1;
                         break;
@@ -117,10 +114,9 @@ int main(){
         memset(word, '\0', max + 1);
         length = 0;
     } while(c != EOF);
-    rewind(inf);
-
     
     fprintf(outf, "#endif\n");
+
     free(word);
     fclose(inf);
     fclose(outf);
