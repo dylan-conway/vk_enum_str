@@ -93,7 +93,7 @@ int main(){
                 }
                 uint32_t bad = 0;
                 for(uint32_t i = 0; i < value_length; i ++){
-                    if(!isxdigit(value[i]) && value[i] != 'x'){
+                    if(!isxdigit(value[i]) && value[i] != 'x' && value[i] != '-'){
                         bad = 1;
                         break;
                     }
