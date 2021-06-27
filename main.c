@@ -8,7 +8,6 @@ int main(){
     FILE* outf = fopen("vk_enum_str.h", "w");
     FILE* inf = fopen("C:/VulkanSDK/1.2.176.1/Include/vulkan/vulkan_core.h", "r");
     fprintf(outf, "#ifndef _VK_ENUM_STR_H_\n#define _VK_ENUM_STR_H_\n\n");
-    fprintf(outf, "#include <vulkan/vulkan.h>\n\n");
 
     // Find largest word
     int max = 0;

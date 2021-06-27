@@ -1,8 +1,6 @@
 #ifndef _VK_ENUM_STR_H_
 #define _VK_ENUM_STR_H_
 
-#include <vulkan/vulkan.h>
-
 #define STR_VK_RESULT(x) (\
 	x==0?"SUCCESS":\
 	x==1?"NOT_READY":\
