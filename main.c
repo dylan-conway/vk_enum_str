@@ -31,7 +31,10 @@ int main(){
 
 
     char* word = malloc(sizeof(char) * max + 1);
+    char* value = malloc(sizeof(char) * max + 1);
+    uint32_t value_length = 0;
     memset(word, '\0', max + 1);
+    memset(value, '\0', max + 1);
 
     // Identify enums and write their names and possible values to file
     do{
@@ -80,9 +83,26 @@ int main(){
                     length = 0;
                     continue;
                 }
-                fprintf(outf, "\tx==%s?\"%s\":\\\n", word, word + 3);
+                while(c == ' ' || c == '='){
+                    c = getc(inf);
+                }
+                while(c != ' ' && c != '\n' && c != '\t' && c != ',' && c != EOF){
+                    value[value_length] = c;
+                    value_length += 1;
+                    c = getc(inf);
+                }
+                uint32_t bad = 0;
+                for(uint32_t i = 0; i < value_length; i ++){
+                    if(!isxdigit(value[i]) && value[i] != 'x'){
+                        bad = 1;
+                        break;
+                    }
+                }
+                if(!bad) fprintf(outf, "\tx==%s?\"%s\":\\\n", value, word + 3);
                 memset(word, '\0', max + 1);
                 length = 0;
+                memset(value, '\0', max + 1);
+                value_length = 0;
                 while(c != '\n'){
                     c = getc(inf);
                 }
