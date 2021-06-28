@@ -117,6 +117,7 @@ int main(){
     fprintf(outf, "#endif\n");
 
     free(word);
+    free(value);
     fclose(inf);
     fclose(outf);
 
